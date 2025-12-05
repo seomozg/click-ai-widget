@@ -8,24 +8,24 @@ import {
 
 const faqs = [
   {
-    question: "How long does indexing take?",
-    answer: "Typically, indexing takes between 2-5 minutes depending on your website size. Larger sites with hundreds of pages may take up to 15 minutes. You'll receive a notification when your agent is ready.",
+    question: "Сколько времени занимает индексация?",
+    answer: "Обычно индексация занимает от 2 до 5 минут в зависимости от размера сайта. Для крупных сайтов с сотнями страниц может потребоваться до 15 минут. Вы получите уведомление, когда агент будет готов.",
   },
   {
-    question: "Is my data secure?",
-    answer: "Absolutely. We use enterprise-grade encryption for all data in transit and at rest. Your website content is stored in isolated vector databases, and we never share your data with third parties. We're SOC 2 compliant.",
+    question: "Безопасны ли мои данные?",
+    answer: "Абсолютно. Мы используем шифрование корпоративного уровня для всех данных при передаче и хранении. Контент вашего сайта хранится в изолированных векторных базах данных, и мы никогда не передаём ваши данные третьим лицам. Мы соответствуем стандарту SOC 2.",
   },
   {
-    question: "Can I customize the widget's look?",
-    answer: "Yes! You can customize colors, position, welcome messages, and more through our dashboard. Premium plans offer full white-labeling options including custom icons and branding.",
+    question: "Можно ли настроить внешний вид виджета?",
+    answer: "Да! Вы можете настроить цвета, положение, приветственные сообщения и многое другое через нашу панель управления. Премиум-тарифы включают полную кастомизацию, включая собственные иконки и брендинг.",
   },
   {
-    question: "What happens if my website content changes?",
-    answer: "Our system automatically re-indexes your site periodically to keep the AI agent up-to-date. You can also trigger a manual re-index anytime through the dashboard.",
+    question: "Что происходит при изменении контента сайта?",
+    answer: "Наша система автоматически переиндексирует ваш сайт периодически, чтобы ИИ-агент оставался актуальным. Вы также можете запустить ручную переиндексацию в любое время через панель управления.",
   },
   {
-    question: "How accurate are the AI responses?",
-    answer: "Our AI is trained specifically on your content, ensuring highly accurate and contextual responses. It only answers based on information available on your site, reducing hallucinations and incorrect information.",
+    question: "Насколько точны ответы ИИ?",
+    answer: "Наш ИИ обучен специально на вашем контенте, что обеспечивает высокую точность и контекстуальность ответов. Он отвечает только на основе информации, доступной на вашем сайте, что снижает вероятность галлюцинаций и неточной информации.",
   },
 ];
 
@@ -42,10 +42,10 @@ const FAQ = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Frequently Asked <span className="gradient-text">Questions</span>
+            Часто задаваемые <span className="gradient-text">вопросы</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Everything you need to know about our AI agent widget
+            Всё, что нужно знать о нашем ИИ-виджете
           </p>
         </motion.div>
 

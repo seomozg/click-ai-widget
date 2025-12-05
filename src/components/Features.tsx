@@ -4,23 +4,23 @@ import { Zap, Brain, Clock, Shield } from "lucide-react";
 const features = [
   {
     icon: Zap,
-    title: "Zero Training Needed",
-    description: "Our AI automatically learns from your website content. No manual setup or data preparation required.",
+    title: "Без обучения",
+    description: "Наш ИИ автоматически учится на контенте вашего сайта. Никакой ручной настройки или подготовки данных.",
   },
   {
     icon: Brain,
-    title: "Context-Aware from Minute One",
-    description: "Answers are based on your actual content, providing accurate and relevant responses to every query.",
+    title: "Контекст с первой минуты",
+    description: "Ответы основаны на реальном контенте вашего сайта — точные и релевантные ответы на каждый запрос.",
   },
   {
     icon: Clock,
-    title: "Embeds in Seconds",
-    description: "A single line of code. Copy, paste, and your AI agent is live on your website instantly.",
+    title: "Установка за секунды",
+    description: "Всего одна строка кода. Скопируйте, вставьте — и ваш ИИ-агент уже работает на сайте.",
   },
   {
     icon: Shield,
-    title: "Secure & Scalable",
-    description: "Enterprise-grade security with automatic scaling. Your data is encrypted and protected.",
+    title: "Безопасность и масштабируемость",
+    description: "Корпоративный уровень безопасности с автоматическим масштабированием. Ваши данные зашифрованы и защищены.",
   },
 ];
 
@@ -40,10 +40,10 @@ const Features = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            Why Choose <span className="gradient-text">Our Solution</span>
+            Почему выбирают <span className="gradient-text">наше решение</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Built for simplicity, designed for performance
+            Создано для простоты, спроектировано для производительности
           </p>
         </motion.div>
 

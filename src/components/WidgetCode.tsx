@@ -66,10 +66,10 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           className="text-center mb-8"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-3">
-            Your AI Agent is <span className="gradient-text">Ready!</span>
+            Ваш ИИ-агент <span className="gradient-text">готов!</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Copy and paste this code to your website
+            Скопируйте и вставьте этот код на ваш сайт
           </p>
         </motion.div>
 
@@ -87,7 +87,7 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Code2 className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Widget Code</span>
+              <span className="font-semibold">Код виджета</span>
             </div>
             <Button
               onClick={handleCopy}
@@ -98,12 +98,12 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
               {copied ? (
                 <>
                   <Check className="w-4 h-4 text-green-400" />
-                  <span className="text-green-400">Copied!</span>
+                  <span className="text-green-400">Скопировано!</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4" />
-                  Copy Code
+                  Копировать
                 </>
               )}
             </Button>
@@ -118,7 +118,7 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           <div className="mt-4 flex items-start gap-3 p-4 rounded-xl bg-secondary/50 border border-border/50">
             <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
             <p className="text-sm text-muted-foreground">
-              Paste this code just before the closing <code className="text-primary">&lt;/body&gt;</code> tag of your website. The widget will automatically appear in the bottom-right corner.
+              Вставьте этот код перед закрывающим тегом <code className="text-primary">&lt;/body&gt;</code> вашего сайта. Виджет автоматически появится в правом нижнем углу.
             </p>
           </div>
         </motion.div>
@@ -130,7 +130,7 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           transition={{ delay: 0.5 }}
           className="mt-6 text-center text-sm text-muted-foreground"
         >
-          Agent configured for: <span className="text-foreground font-medium">{url}</span>
+          Агент настроен для: <span className="text-foreground font-medium">{url}</span>
         </motion.div>
       </div>
     </motion.section>
