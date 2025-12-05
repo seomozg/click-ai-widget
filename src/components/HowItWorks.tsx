@@ -4,26 +4,26 @@ import { Globe, Database, Code, Rocket } from "lucide-react";
 const steps = [
   {
     icon: Globe,
-    title: "Enter URL",
-    description: "Provide your website address to get started",
+    title: "Введите URL",
+    description: "Укажите адрес вашего сайта для начала работы",
     color: "from-cyan-400 to-blue-500",
   },
   {
     icon: Database,
-    title: "We Index & Train",
-    description: "Our system crawls and indexes your content into a vector database",
+    title: "Индексация и обучение",
+    description: "Наша система сканирует и индексирует контент в векторную базу данных",
     color: "from-blue-500 to-purple-500",
   },
   {
     icon: Code,
-    title: "Copy Widget Code",
-    description: "Receive a simple JavaScript snippet ready to embed",
+    title: "Скопируйте код виджета",
+    description: "Получите простой JavaScript-код для встраивания",
     color: "from-purple-500 to-pink-500",
   },
   {
     icon: Rocket,
-    title: "Go Live!",
-    description: "Your AI agent answers visitor questions using your site's data",
+    title: "Запуск!",
+    description: "Ваш ИИ-агент отвечает на вопросы посетителей, используя данные сайта",
     color: "from-pink-500 to-orange-400",
   },
 ];
@@ -41,10 +41,10 @@ const HowItWorks = () => {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-            How It <span className="gradient-text">Works</span>
+            Как это <span className="gradient-text">работает</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Four simple steps to transform your website with AI-powered support
+            Четыре простых шага для добавления ИИ-поддержки на ваш сайт
           </p>
         </motion.div>
 

@@ -34,7 +34,7 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
         >
           <Sparkles className="w-4 h-4 text-primary" />
-          <span className="text-sm text-muted-foreground">Powered by Advanced AI</span>
+          <span className="text-sm text-muted-foreground">На базе продвинутого ИИ</span>
         </motion.div>
 
         {/* Main headline */}
@@ -44,9 +44,9 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
         >
-          An AI Agent for Your Website
+          ИИ-агент для вашего сайта
           <br />
-          <span className="gradient-text">in 1 Click!</span>
+          <span className="gradient-text">в 1 клик!</span>
         </motion.h1>
 
         {/* Sub-headline */}
@@ -56,7 +56,7 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto text-balance"
         >
-          Instantly add a smart, context-aware assistant trained on your own website's content. No coding required.
+          Мгновенно добавьте умного контекстного помощника, обученного на контенте вашего сайта. Без программирования.
         </motion.p>
 
         {/* URL Input Form */}
@@ -72,7 +72,7 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
               type="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://your-website.com"
+              placeholder="https://ваш-сайт.ru"
               required
               className="w-full h-14 sm:h-16 px-6 rounded-xl bg-secondary/80 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 text-base sm:text-lg"
             />
@@ -92,11 +92,11 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
                 />
-                Processing...
+                Обработка...
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                Generate Agent
+                Создать агента
                 <ArrowRight className="w-5 h-5" />
               </span>
             )}
@@ -112,15 +112,15 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
         >
           <span className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            No credit card required
+            Без банковской карты
           </span>
           <span className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            Setup in 60 seconds
+            Настройка за 60 секунд
           </span>
           <span className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            Free tier available
+            Бесплатный тариф
           </span>
         </motion.div>
       </div>
