@@ -1,0 +1,140 @@
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import { Copy, Check, Code2, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+interface WidgetCodeProps {
+  url: string;
+  isVisible: boolean;
+}
+
+const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
+  const [copied, setCopied] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Generate a unique ID based on URL
+  const uniqueId = btoa(url).slice(0, 12).replace(/[^a-zA-Z0-9]/g, "");
+  
+  const widgetCode = `<script src="https://widget.aiagent.com/agent.js?key=${uniqueId}"></script>`;
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(widgetCode);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (isVisible && sectionRef.current) {
+      setTimeout(() => {
+        sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 100);
+    }
+  }, [isVisible]);
+
+  if (!isVisible) return null;
+
+  return (
+    <motion.section
+      ref={sectionRef}
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
+      className="py-24 px-4"
+    >
+      <div className="max-w-3xl mx-auto">
+        {/* Success indicator */}
+        <motion.div
+          initial={{ scale: 0 }}
+          animate={{ scale: 1 }}
+          transition={{ duration: 0.5, delay: 0.2, type: "spring" }}
+          className="flex justify-center mb-8"
+        >
+          <div className="w-20 h-20 rounded-full bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center glow-lg">
+            <Check className="w-10 h-10 text-primary-foreground" />
+          </div>
+        </motion.div>
+
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-center mb-8"
+        >
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3">
+            Your AI Agent is <span className="gradient-text">Ready!</span>
+          </h2>
+          <p className="text-muted-foreground text-lg">
+            Copy and paste this code to your website
+          </p>
+        </motion.div>
+
+        {/* Code block */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="glass-card rounded-2xl p-6 relative overflow-hidden"
+        >
+          {/* Decorative gradient */}
+          <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary via-accent to-primary" />
+          
+          {/* Header */}
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-2">
+              <Code2 className="w-5 h-5 text-primary" />
+              <span className="font-semibold">Widget Code</span>
+            </div>
+            <Button
+              onClick={handleCopy}
+              variant="glass"
+              size="sm"
+              className="gap-2"
+            >
+              {copied ? (
+                <>
+                  <Check className="w-4 h-4 text-green-400" />
+                  <span className="text-green-400">Copied!</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-4 h-4" />
+                  Copy Code
+                </>
+              )}
+            </Button>
+          </div>
+
+          {/* Code display */}
+          <div className="code-block text-sm sm:text-base">
+            <code>{widgetCode}</code>
+          </div>
+
+          {/* Instructions */}
+          <div className="mt-4 flex items-start gap-3 p-4 rounded-xl bg-secondary/50 border border-border/50">
+            <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+            <p className="text-sm text-muted-foreground">
+              Paste this code just before the closing <code className="text-primary">&lt;/body&gt;</code> tag of your website. The widget will automatically appear in the bottom-right corner.
+            </p>
+          </div>
+        </motion.div>
+
+        {/* Website preview */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.5 }}
+          className="mt-6 text-center text-sm text-muted-foreground"
+        >
+          Agent configured for: <span className="text-foreground font-medium">{url}</span>
+        </motion.div>
+      </div>
+    </motion.section>
+  );
+};
+
+export default WidgetCode;
