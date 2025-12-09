@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface HeroProps {
   onSubmit: (url: string) => void;
@@ -10,6 +11,7 @@ interface HeroProps {
 
 const Hero = ({ onSubmit, isLoading }: HeroProps) => {
   const [url, setUrl] = useState("");
+  const { t } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +36,7 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
           className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card mb-8"
         >
           <Sparkles className="w-4 h-4 text-primary" />
-          <span className="text-sm text-muted-foreground">На базе продвинутого ИИ</span>
+          <span className="text-sm text-muted-foreground">{t.hero.badge}</span>
         </motion.div>
 
         {/* Main headline */}
@@ -44,9 +46,9 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-6 tracking-tight"
         >
-          ИИ-агент для вашего сайта
+          {t.hero.title1}
           <br />
-          <span className="gradient-text">в 1 клик!</span>
+          <span className="gradient-text">{t.hero.title2}</span>
         </motion.h1>
 
         {/* Sub-headline */}
@@ -56,7 +58,7 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
           transition={{ duration: 0.5, delay: 0.2 }}
           className="text-lg sm:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto text-balance"
         >
-          Мгновенно добавьте умного контекстного помощника, обученного на контенте вашего сайта. Без программирования.
+          {t.hero.subtitle}
         </motion.p>
 
         {/* URL Input Form */}
@@ -72,7 +74,7 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
               type="url"
               value={url}
               onChange={(e) => setUrl(e.target.value)}
-              placeholder="https://ваш-сайт.ru"
+              placeholder={t.hero.placeholder}
               required
               className="w-full h-14 sm:h-16 px-6 rounded-xl bg-secondary/80 border border-border text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all duration-300 text-base sm:text-lg"
             />
@@ -92,11 +94,11 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
                   transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
                   className="w-5 h-5 border-2 border-primary-foreground/30 border-t-primary-foreground rounded-full"
                 />
-                Обработка...
+                {t.hero.loading}
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                Создать агента
+                {t.hero.button}
                 <ArrowRight className="w-5 h-5" />
               </span>
             )}
@@ -112,15 +114,15 @@ const Hero = ({ onSubmit, isLoading }: HeroProps) => {
         >
           <span className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            Без банковской карты
+            {t.hero.trust1}
           </span>
           <span className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            Настройка за 60 секунд
+            {t.hero.trust2}
           </span>
           <span className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-green-500" />
-            Бесплатный тариф
+            {t.hero.trust3}
           </span>
         </motion.div>
       </div>
