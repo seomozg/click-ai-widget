@@ -2,20 +2,40 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Copy, Check, Code2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+interface WidgetConfig {
+  title: string;
+  welcomeMessage: string;
+  sendButtonText: string;
+  inputPlaceholder: string;
+  color: string;
+}
 
 interface WidgetCodeProps {
   url: string;
   isVisible: boolean;
+  config: WidgetConfig;
 }
 
-const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
+const WidgetCode = ({ url, isVisible, config }: WidgetCodeProps) => {
   const [copied, setCopied] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  const { t } = useLanguage();
 
   // Generate a unique ID based on URL
   const uniqueId = btoa(url).slice(0, 12).replace(/[^a-zA-Z0-9]/g, "");
   
-  const widgetCode = `<script src="https://widget.aiagent.com/agent.js?key=${uniqueId}"></script>`;
+  const configParams = new URLSearchParams({
+    key: uniqueId,
+    title: config.title,
+    welcome: config.welcomeMessage,
+    sendBtn: config.sendButtonText,
+    placeholder: config.inputPlaceholder,
+    color: config.color.replace("#", ""),
+  }).toString();
+
+  const widgetCode = `<script src="https://widget.aiagent.com/agent.js?${configParams}"></script>`;
 
   const handleCopy = async () => {
     try {
@@ -66,10 +86,10 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           className="text-center mb-8"
         >
           <h2 className="text-3xl sm:text-4xl font-bold mb-3">
-            Ваш ИИ-агент <span className="gradient-text">готов!</span>
+            {t.widgetCode.ready} <span className="gradient-text">{t.widgetCode.readyHighlight}</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Скопируйте и вставьте этот код на ваш сайт
+            {t.widgetCode.copyInstructions}
           </p>
         </motion.div>
 
@@ -87,7 +107,7 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <Code2 className="w-5 h-5 text-primary" />
-              <span className="font-semibold">Код виджета</span>
+              <span className="font-semibold">{t.widgetCode.codeTitle}</span>
             </div>
             <Button
               onClick={handleCopy}
@@ -98,27 +118,27 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
               {copied ? (
                 <>
                   <Check className="w-4 h-4 text-green-400" />
-                  <span className="text-green-400">Скопировано!</span>
+                  <span className="text-green-400">{t.widgetCode.copied}</span>
                 </>
               ) : (
                 <>
                   <Copy className="w-4 h-4" />
-                  Копировать
+                  {t.widgetCode.copy}
                 </>
               )}
             </Button>
           </div>
 
           {/* Code display */}
-          <div className="code-block text-sm sm:text-base">
-            <code>{widgetCode}</code>
+          <div className="code-block text-sm sm:text-base overflow-x-auto">
+            <code className="break-all">{widgetCode}</code>
           </div>
 
           {/* Instructions */}
           <div className="mt-4 flex items-start gap-3 p-4 rounded-xl bg-secondary/50 border border-border/50">
             <Info className="w-5 h-5 text-primary mt-0.5 shrink-0" />
             <p className="text-sm text-muted-foreground">
-              Вставьте этот код перед закрывающим тегом <code className="text-primary">&lt;/body&gt;</code> вашего сайта. Виджет автоматически появится в правом нижнем углу.
+              {t.widgetCode.instructions} <code className="text-primary">&lt;/body&gt;</code> вашего сайта.
             </p>
           </div>
         </motion.div>
@@ -130,7 +150,7 @@ const WidgetCode = ({ url, isVisible }: WidgetCodeProps) => {
           transition={{ delay: 0.5 }}
           className="mt-6 text-center text-sm text-muted-foreground"
         >
-          Агент настроен для: <span className="text-foreground font-medium">{url}</span>
+          {t.widgetCode.configuredFor} <span className="text-foreground font-medium">{url}</span>
         </motion.div>
       </div>
     </motion.section>
