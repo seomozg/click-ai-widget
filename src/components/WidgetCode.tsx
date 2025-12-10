@@ -16,26 +16,29 @@ interface WidgetCodeProps {
   url: string;
   isVisible: boolean;
   config: WidgetConfig;
+  collectionName: string;
 }
 
-const WidgetCode = ({ url, isVisible, config }: WidgetCodeProps) => {
+const WidgetCode = ({ url, isVisible, config, collectionName }: WidgetCodeProps) => {
   const [copied, setCopied] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const { t } = useLanguage();
 
-  // Generate a unique ID based on URL
-  const uniqueId = btoa(url).slice(0, 12).replace(/[^a-zA-Z0-9]/g, "");
-  
-  const configParams = new URLSearchParams({
-    key: uniqueId,
-    title: config.title,
-    welcome: config.welcomeMessage,
-    sendBtn: config.sendButtonText,
-    placeholder: config.inputPlaceholder,
-    color: config.color.replace("#", ""),
-  }).toString();
 
-  const widgetCode = `<script src="https://widget.aiagent.com/agent.js?${configParams}"></script>`;
+
+  const widgetCode = `<script>
+window.AIWidgetConfig = {
+  apiBase: 'http://localhost:8000',
+  collection: '${collectionName}',
+  title: '${config.title}',
+  language: 'en',
+  welcomeMessage: '${config.welcomeMessage}',
+  color: '${config.color}',
+  sendButtonText: '${config.sendButtonText}',
+  inputPlaceholder: '${config.inputPlaceholder}'
+};
+</script>
+<script src="http://localhost:8000/widget/widget.js"></script>`;
 
   const handleCopy = async () => {
     try {

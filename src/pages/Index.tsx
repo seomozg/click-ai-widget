@@ -12,6 +12,7 @@ import { toast } from "@/hooks/use-toast";
 
 const IndexContent = () => {
   const [submittedUrl, setSubmittedUrl] = useState("");
+  const [collectionName, setCollectionName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [showWidgetCode, setShowWidgetCode] = useState(false);
   const [widgetConfig, setWidgetConfig] = useState({
@@ -24,18 +25,54 @@ const IndexContent = () => {
 
   const handleUrlSubmit = async (url: string) => {
     setIsLoading(true);
-    
-    // Simulate API call / processing
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    
-    setSubmittedUrl(url);
-    setShowWidgetCode(true);
-    setIsLoading(false);
-    
-    toast({
-      title: "Success!",
-      description: "Your AI agent has been generated and is ready to embed.",
-    });
+
+    try {
+      // Generate collection name from URL domain
+      const domainMatch = url.match(/^(?:https?:\/\/)?(?:www\.)?([^./]+)/);
+      const collectionName = domainMatch ? domainMatch[1].replace(/[^a-zA-Z0-9]/g, '').toLowerCase() : 'default_collection';
+
+      const requestBody = {
+        url: url,
+        collection: collectionName
+      };
+
+      const response = await fetch('/api/ingest', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': 'your-random-secret-key'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('API Error:', response.status, errorText);
+        throw new Error(`Failed to create agent (${response.status})`);
+      }
+
+      const data = await response.json();
+      console.log('Ingest job created:', data.job_id);
+
+      setSubmittedUrl(url);
+      setCollectionName(collectionName);
+      setShowWidgetCode(true);
+
+      toast({
+        title: "Agent Created!",
+        description: "AI agent is being trained on your website. Embed code is ready.",
+      });
+
+    } catch (error) {
+      console.error('Error creating agent:', error);
+      toast({
+        title: "Error",
+        description: "Failed to create AI agent. Please try again.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -43,7 +80,7 @@ const IndexContent = () => {
       <LanguageSwitcher />
       <Hero onSubmit={handleUrlSubmit} isLoading={isLoading} />
       <HowItWorks />
-      <WidgetCode url={submittedUrl} isVisible={showWidgetCode} config={widgetConfig} />
+      <WidgetCode url={submittedUrl} isVisible={showWidgetCode} config={widgetConfig} collectionName={collectionName} />
       <WidgetConfig config={widgetConfig} onChange={setWidgetConfig} isVisible={showWidgetCode} />
       <Features />
       <FAQ />
