@@ -28,7 +28,7 @@ const WidgetCode = ({ url, isVisible, config, collectionName }: WidgetCodeProps)
 
   const widgetCode = `<script>
 window.AIWidgetConfig = {
-  apiBase: 'http://localhost:8000',
+  apiBase: 'https://test-domain.ru/',
   collection: '${collectionName}',
   title: '${config.title}',
   language: 'en',
@@ -38,7 +38,7 @@ window.AIWidgetConfig = {
   inputPlaceholder: '${config.inputPlaceholder}'
 };
 </script>
-<script src="http://localhost:8000/widget/widget.js"></script>`;
+<script src="https://test-domain.ru/widget/widget.js"></script>`;
 
   const handleCopy = async () => {
     try {
