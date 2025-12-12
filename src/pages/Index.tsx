@@ -36,7 +36,7 @@ const IndexContent = () => {
         collection: collectionName
       };
 
-      const response = await fetch('/api/ingest', {
+      const response = await fetch('/ingest', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
