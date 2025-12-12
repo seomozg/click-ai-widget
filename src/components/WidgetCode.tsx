@@ -28,7 +28,7 @@ const WidgetCode = ({ url, isVisible, config, collectionName }: WidgetCodeProps)
 
   const widgetCode = `<script>
 window.AIWidgetConfig = {
-  apiBase: 'https://test-domain.ru/',
+  apiBase: 'https://test-domain.ru',
   collection: '${collectionName}',
   title: '${config.title}',
   language: 'en',
